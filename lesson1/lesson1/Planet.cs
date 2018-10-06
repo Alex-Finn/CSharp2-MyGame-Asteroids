@@ -9,10 +9,10 @@ namespace lesson1
 {
     class Planet : BaseObject
     {
-        Image planet1 = Image.FromFile("../../resources/planet1.png");
-        Image planet2 = Image.FromFile("../../resources/planet2.png");
-        Image planet3 = Image.FromFile("../../resources/planet3.png");
-        public Planet(Point pos, Point dir, Size size) : base(pos,dir,size)
+        Image planet1 = Properties.Resources.planet1;
+        Image planet2 = Properties.Resources.planet2;
+        Image planet3 = Properties.Resources.planet3;
+        public Planet(Point pos, Point dir, Size size, int speed) : base(pos,dir,size, speed)
         {
         }
 

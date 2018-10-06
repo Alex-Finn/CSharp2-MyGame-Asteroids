@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -38,6 +39,17 @@ namespace lesson1
             // Связываем буфер в памяти с графическим объектом,
             // чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
+            // заполняем словарь объектами
+            Dictionary<int, object> dictionary = new Dictionary<int, object>(30);
+            Random rnd = new Random();
+            for (int i = 0; i < dictionary.Count; i++)
+            {
+                if (rnd.Next(0,100)<10)
+                {
+                    dictionary.Add(i,new Planet((new Point(Width,-(rnd.Next(0,Height)))),new Point(),,))
+                }
+            }
+            
             Load(); // сам написал
         }
         private static void Timer_Tick(object sender, EventArgs e)

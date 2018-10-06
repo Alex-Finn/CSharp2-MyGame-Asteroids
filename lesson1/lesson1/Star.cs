@@ -9,8 +9,8 @@ namespace lesson1
 {
     class Star : BaseObject
     {
-        Image star1 = Image.FromFile("../../resources/star1.png");
-        public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
+        Image star1 = Properties.Resources.star1;
+        public Star(Point pos, Point dir, Size size, int speed) : base(pos, dir, size, speed)
         {
         }
         public override void Draw()

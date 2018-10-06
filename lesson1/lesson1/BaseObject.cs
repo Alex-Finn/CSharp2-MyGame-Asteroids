@@ -12,12 +12,14 @@ namespace lesson1
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
+        protected float Speed;
         protected Random rnd = new Random();
-        public BaseObject(Point pos, Point dir, Size size)
+        public BaseObject(Point pos, Point dir, Size size, int speed)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
+            Speed = speed;
         }
 
         public virtual void Draw()

@@ -9,13 +9,10 @@ namespace lesson1
 {
     class Asteroids:BaseObject
     {
-        Image asteroid1 = Image.FromFile("../../resources/aster1.png");
-        Image asteroid2 = Image.FromFile("../../resources/aster2.png");
-        public Asteroids(Point pos, Point dir, Size size):base(pos,dir,size)
+        Image asteroid1 = Properties.Resources.aster1;
+        Image asteroid2 = Properties.Resources.aster2;
+        public Asteroids(Point pos, Point dir, Size size, int speed):base(pos, dir, size, speed)
         {
-            Pos = pos;
-            Dir = dir;
-            Size = size;
         }
 
         public override void Draw()
