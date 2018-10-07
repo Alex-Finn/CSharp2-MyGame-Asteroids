@@ -9,36 +9,34 @@ namespace lesson1
 {
     class Planet : BaseObject
     {
-        Image planet1 = Properties.Resources.planet1;
-        Image planet2 = Properties.Resources.planet2;
-        Image planet3 = Properties.Resources.planet3;
-        public Planet(Point pos, Point dir, Size size, int speed) : base(pos,dir,size, speed)
+        static Image planet1;
+        //Image planet2 = Properties.Resources.planet2;
+        //Image planet3 = Properties.Resources.planet3;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
+        public Planet(Point pos, Point dir, Size size) : base(pos,dir,size)
         {
+            planet1 = Properties.Resources.planet1;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Draw()
         {
-            switch (rnd.Next(0, 3))
-            {
-                case 0:
-                    Game.Buffer.Graphics.DrawImage(planet1, Pos.X, Pos.Y, Size.Width, Size.Height);
-                    break;
-                case 1:
-                    Game.Buffer.Graphics.DrawImage(planet2, Pos.X, Pos.Y, Size.Width, Size.Height);
-                    break;
-                default:
-                    Game.Buffer.Graphics.DrawImage(planet3, Pos.X, Pos.Y, Size.Width, Size.Height);
-                    break;
-            }
+            Game.Buffer.Graphics.DrawImage(planet1, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Update()
         {
             Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0)
-            {
+            if (Pos.X < 0 - Size.Width)
                 Pos.X = Game.Width + Size.Width;
-            }
         }
     }
 }
