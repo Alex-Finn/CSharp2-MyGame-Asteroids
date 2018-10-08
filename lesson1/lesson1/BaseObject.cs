@@ -12,6 +12,7 @@ namespace lesson1
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
+        protected Random rnd = new Random();
         //protected Random rnd = new Random();
         /// <summary>
         /// 
@@ -28,14 +29,18 @@ namespace lesson1
         /// <summary>
         /// 
         /// </summary>
-        public virtual void Draw()
-        {
-        }
+        public abstract void Draw();
         /// <summary>
         /// 
         /// </summary>
         public virtual void Update()
         {
+            Pos.X = Pos.X - Dir.X;
+            if (Pos.X < 0 - Size.Width)
+            {
+                Pos.X = Game.Width + Size.Width;
+                Pos.Y = rnd.Next(Game.Height-Size.Height);
+            }
         }
     }
 }

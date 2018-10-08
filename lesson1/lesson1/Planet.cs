@@ -9,34 +9,43 @@ namespace lesson1
 {
     class Planet : BaseObject
     {
-        static Image planet1;
-        //Image planet2 = Properties.Resources.planet2;
-        //Image planet3 = Properties.Resources.planet3;
+        Image planet;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="dir"></param>
         /// <param name="size"></param>
-        public Planet(Point pos, Point dir, Size size) : base(pos,dir,size)
+        public Planet(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            planet1 = Properties.Resources.planet1;
+            switch (rnd.Next(1, 5))
+            {
+                case 1:
+                    planet = Properties.Resources.planet2;
+                    break;
+                case 2:
+                    planet = Properties.Resources.planet3;
+                    break;
+                case 3:
+                    planet = Properties.Resources.planet4;
+                    break;
+                default:
+                    planet = Properties.Resources.planet1;
+                    break;
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(planet1, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(planet, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         /// <summary>
         /// 
         /// </summary>
-        public override void Update()
+        public new void Update()
         {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0 - Size.Width)
-                Pos.X = Game.Width + Size.Width;
         }
     }
 }

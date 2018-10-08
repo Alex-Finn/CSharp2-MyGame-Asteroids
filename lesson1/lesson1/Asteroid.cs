@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace lesson1
 {
-    class Asteroid:BaseObject
+    class Asteroid : BaseObject
     {
-        static Image asteroid1;
+        Image asteroid;
         //Image asteroid2 = Properties.Resources.aster2;
         /// <summary>
         /// 
@@ -19,14 +19,23 @@ namespace lesson1
         /// <param name="size"></param>
         public Asteroid(Point pos, Point dir, Size size):base(pos, dir, size)
         {
-            asteroid1 = Properties.Resources.aster1;
+            switch (rnd.Next(1, 3))
+            {
+                case 1:
+                    asteroid = Properties.Resources.aster1;
+                    break;
+                default:
+                    asteroid = Properties.Resources.aster2;
+                    break;
+            }
+
         }
         /// <summary>
         /// 
         /// </summary>
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(asteroid1, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(asteroid, Pos.X, Pos.Y, Size.Width, Size.Height);
             // Game.Buffer.Graphics.DrawImage(asteroid2, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         /// <summary>

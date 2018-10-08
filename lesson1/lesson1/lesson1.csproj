@@ -113,13 +113,19 @@
     <None Include="resources\planet2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\star1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="resources\planet4.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\redtesla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\star2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\star3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\star1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

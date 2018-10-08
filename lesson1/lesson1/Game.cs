@@ -79,17 +79,23 @@ namespace lesson1
         /// </summary>
         public static void Load()
         {
-            _objs = new BaseObject[61];
+            _objs = new BaseObject[41];
 
             int objSize, objSpeed, objSpeed2;
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 21; i++)
             {
-                objSize = rnd.Next(50,121);
+                objSize = rnd.Next(10, 20);
+                objSpeed = rnd.Next(3, 30);
+                _objs[i] = new Star(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
+}            
+            for (int i = 21; i < 26; i++)
+            {
+                objSize = rnd.Next(50, 121);
                 objSpeed = rnd.Next(1, 10);
-                _objs[i] = new Planet(new Point(Game.Width+rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
+                _objs[i] = new Planet(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
             }
-            for (int i = 11; i < 31; i++)
-            {
+            for (int i = 26; i < 40; i++)
+            {                
                 objSize = rnd.Next(15, 20);
                 objSpeed = rnd.Next(-5, 5);
                 objSpeed2 = rnd.Next(-5, 5);
@@ -97,13 +103,7 @@ namespace lesson1
                 if (objSpeed2 == 0) objSpeed2 = 2;
                 _objs[i] = new Asteroid(new Point(rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed2), new Size(objSize, objSize));
             }
-            for (int i = 31; i < 60; i++)
-            {
-                objSize = rnd.Next(2, 5);
-                objSpeed = rnd.Next(3, 30);
-                _objs[i] = new Star(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
-            }
-            _objs[60] = new Player(new Point(10, Game.Height/2), new Point(0, 5), new Size(100, 60));
+            _objs[40] = new Player(new Point(10, Game.Height/2), new Point(0, 5), new Size(100, 60));
 
 
             /*for (int i = 0; i < _objs.Length / 2; i++)
