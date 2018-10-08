@@ -43,8 +43,14 @@ namespace lesson1
         /// <summary>
         /// 
         /// </summary>
-        public new void Update()
-        {                     
+        public override void Update()
+        {
+            Pos.X = Pos.X - Dir.X;
+            if (Pos.X < 0 - Size.Width)
+            {
+                Pos.X = Game.Width + Size.Width;
+                Pos.Y = rnd.Next(Game.Height - Size.Height);
+            }
         }
     }
 }

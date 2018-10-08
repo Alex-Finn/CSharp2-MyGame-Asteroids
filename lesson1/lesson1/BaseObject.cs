@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace lesson1
 {
-    abstract class  BaseObject
+    abstract class BaseObject : ICollision
     {
         protected Point Pos;
         protected Point Dir;
@@ -17,30 +17,29 @@ namespace lesson1
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pos"></param>
+        /// <param name="pos">Переменная типа Point, задающая позицию объекта по x и y</param>
         /// <param name="dir"></param>
         /// <param name="size"></param>
-        public BaseObject(Point pos, Point dir, Size size)
+        protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
         }
         /// <summary>
-        /// 
+        /// Абстрактный метод Draw. Переопределяется в наследниках
         /// </summary>
         public abstract void Draw();
         /// <summary>
-        /// 
+        /// Абстрактный метод Update для объектов
         /// </summary>
-        public virtual void Update()
-        {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < 0 - Size.Width)
-            {
-                Pos.X = Game.Width + Size.Width;
-                Pos.Y = rnd.Next(Game.Height-Size.Height);
-            }
-        }
+        public abstract void Update();
+
+        // Так как переданный объект тоже должен будет реализовывать интерфейс ICollision
+        // мы можем использовать его свойство Rect и метод IntersectsWith для
+        // обнаружения пересечения с нашим объектом (а можно наоборот)
+        public bool Collision(ICollision o) => o.Rect.IntersectsWith(this.Rect);
+
+        public Rectangle Rect => new Rectangle(Pos, Size);
     }
 }
