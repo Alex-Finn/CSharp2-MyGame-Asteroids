@@ -17,15 +17,19 @@ namespace lesson_2
             for (int i = 0; i < workerArray.Length; i++)
             {
                 int genID = rnd.Next(100, 500);
-                if (genID > 250)                
-                    workerArray[i] = new FixPayWorker($"Name{i}", rnd.Next(18,65), genID);                
+                if (genID > 200) 
+                    
+                    workerArray[i] = new FixPayWorker($"Name{i}", rnd.Next(18,65), genID*i+100, (rnd.NextDouble()+1)*30000);                
                 else
-                    workerArray[i] = new HourPayWorker($"Name{i}", rnd.Next(18, 65), genID);
+                    workerArray[i] = new HourPayWorker($"Name{i}", rnd.Next(18, 65), genID*i+10, (rnd.NextDouble()+1)*100);
             }
-
+                        
             foreach (BaseWorker wrkr in workerArray)
             {
-                Console.WriteLine($"Name {wrkr.}");
+                Console.WriteLine(
+                    $"Name - {wrkr.Name,6} || Age - {wrkr.Age,3} || ID - {wrkr.ID,5}\n" +
+                    $"MoneyRate - {wrkr.Rate} || Salary in month - {wrkr.AverMonthSalary:f0} ({wrkr.GetType().Name})\n" +
+                    $"==============================================================\n");
             }
 
             Console.ReadKey();

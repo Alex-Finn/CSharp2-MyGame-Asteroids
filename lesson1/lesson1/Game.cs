@@ -98,8 +98,8 @@ namespace lesson1
             int objSize, objSpeed, objSpeed2;
             for (int i = 0; i < 26; i++)
             {
-                objSize = rnd.Next(10, 20);
-                objSpeed = rnd.Next(3, 30);
+                objSize = rnd.Next(5, 10);
+                objSpeed = rnd.Next(3, 15);
                 _objs[i] = new Star(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
 }            
             for (int i = 26; i < 30; i++)

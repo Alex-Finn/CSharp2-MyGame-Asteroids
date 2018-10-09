@@ -6,13 +6,24 @@ using System.Threading.Tasks;
 
 namespace lesson_2
 {
+    /// <summary>
+    /// Класс, описывающий работник с фиксированной месячной зарплатой
+    /// </summary>
     class FixPayWorker : BaseWorker
     {
-        public FixPayWorker(string name, int age, double rate):base(name,age,rate)
+        /// <summary>
+        /// Конструктор объекта - работника с фиксированной оплатой труда
+        /// </summary>
+        /// <param name="name">Имя работника</param>
+        /// <param name="age">Возраст работника</param>
+        /// <param name="id">Идентификатор работника</param>
+        /// <param name="rate">Зарплата работника в месяц</param>
+        public FixPayWorker(string name, int age, int id, double rate):base(name,age,id,rate)
         {
         }
-
-        private double moneyRate;
-        public override double AverMonthSalary => moneyRate;
+        /// <summary>
+        /// Метод, вычисляющий среднюю месячную зарплату работника
+        /// </summary>
+        public override double AverMonthSalary => Rate;
     }
 }
