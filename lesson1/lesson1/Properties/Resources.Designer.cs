@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace lesson1.Properties {
+namespace Asteroids.Properties {
     using System;
     
     
