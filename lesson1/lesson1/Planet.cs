@@ -19,7 +19,7 @@ namespace Asteroids
         public Planet(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
             switch (rnd.Next(1, 5))
-            {
+            {                
                 case 1:
                     planet = Properties.Resources.planet2;
                     break;
@@ -50,7 +50,8 @@ namespace Asteroids
             if (Pos.X < 0 - Size.Width)
             {
                 Pos.X = Game.Width + Size.Width;
-                Pos.Y = rnd.Next(Game.Height - Size.Height);
+                Pos.Y = rnd.Next(Game.Height - Size.Height/2);
+                Dir.X = rnd.Next(1,5);
             }
         }
     }

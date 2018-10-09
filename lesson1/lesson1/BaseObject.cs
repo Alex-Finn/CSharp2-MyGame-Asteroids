@@ -12,7 +12,7 @@ namespace Asteroids
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
-        protected Random rnd = new Random();
+        protected static Random rnd = new Random(10);
         //protected Random rnd = new Random();
         /// <summary>
         /// 

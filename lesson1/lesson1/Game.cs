@@ -23,7 +23,7 @@ namespace Asteroids
         public static Image space = Properties.Resources.space;
         static Game()
         {
-            rnd = new Random(); // подсмотрел
+            rnd = new Random(0); // подсмотрел
         }
         /// <summary>
         /// 
@@ -104,19 +104,19 @@ namespace Asteroids
 }            
             for (int i = 26; i < 30; i++)
             {
-                objSize = rnd.Next(50, 121);
-                objSpeed = rnd.Next(1, 10);
+                objSize = rnd.Next(300, 600);
+                objSpeed = rnd.Next(1, 5);
                 _objs[i] = new Planet(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
             }
             for (int i = 0; i < _asteroids.Length; i++)
             {
-                objSize = rnd.Next(15, 20);
-                objSpeed = rnd.Next(-5, 5);
-                objSpeed2 = rnd.Next(-5, 5);
-                if (objSpeed == 0) objSpeed = 2;
-                if (objSpeed2 == 0) objSpeed2 = 2;
+                objSize = rnd.Next(30, 40);
+                objSpeed = rnd.Next(2, 5);
+                objSpeed2 = 0; // rnd.Next(2, 5);
+                //if (objSpeed == 0) objSpeed = 2;
+                //if (objSpeed2 == 0) objSpeed2 = 2;
                 //_objs[i] = new Asteroid(new Point(rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed2), new Size(objSize, objSize));
-                _asteroids[i] = new Asteroid(new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed2), new Size(objSize, objSize));
+                _asteroids[i] = new Asteroid(new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(-objSpeed, objSpeed2), new Size(objSize, objSize));
             }
 
             _player = new Player(new Point(10, Game.Height/2), new Point(0, 2), new Size(100, 60));

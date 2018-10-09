@@ -10,15 +10,15 @@ namespace Asteroids
     class Star : BaseObject
     {
         Image star;
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="pos"></param>
-       /// <param name="dir"></param>
-       /// <param name="size"></param>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dir"></param>
+        /// <param name="size"></param>
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            switch (rnd.Next(1, 4))
+            switch (rnd.Next(1,4))
             {
                 case 1:
                     star = Properties.Resources.star1;
@@ -50,6 +50,7 @@ namespace Asteroids
             {
                 Pos.X = Game.Width + Size.Width;
                 Pos.Y = rnd.Next(Game.Height - Size.Height);
+                Dir.X = rnd.Next(3, 15);
             }
         }
     }
