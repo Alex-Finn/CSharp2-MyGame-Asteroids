@@ -9,7 +9,7 @@ namespace Asteroids
 {
     class Star : BaseObject
     {
-        Image star;
+        Image starPic;
         /// <summary>
         /// 
         /// </summary>
@@ -21,13 +21,13 @@ namespace Asteroids
             switch (rnd.Next(1,4))
             {
                 case 1:
-                    star = Properties.Resources.star1;
+                    starPic = Properties.Resources.star1;
                     break;
                 case 2:
-                    star = Properties.Resources.star2;
+                    starPic = Properties.Resources.star2;
                     break;
                 default:
-                    star = Properties.Resources.star3;
+                    starPic = Properties.Resources.star3;
                     break;
             }
         }
@@ -38,7 +38,7 @@ namespace Asteroids
         {
             // Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X, Pos.Y, Pos.X + Size.Width, Pos.Y + Size.Height);
             // Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X + Size.Width, Pos.Y, Pos.X, Pos.Y + Size.Height);           
-            Game.Buffer.Graphics.DrawImage(star, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(starPic, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         /// <summary>
         /// 

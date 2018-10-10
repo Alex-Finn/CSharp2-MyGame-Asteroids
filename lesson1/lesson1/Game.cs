@@ -15,15 +15,19 @@ namespace Asteroids
         public static int Height { get; set; }
 
         public static BaseObject[] _objs;
-        private static Bullet _bullet;
+        private static List<Bullet> _bullets;
         private static Asteroid[] _asteroids;
         private static Player _player;
 
-        public static Random rnd; // подсмотрел
-        public static Image space = Properties.Resources.space;
+        public static Random rnd = new Random(0); // подсмотрел
+        public static Image spacePic = Properties.Resources.space;
+
+        public static Label energyLabel = new Label();
+        
+        
         static Game()
         {
-            rnd = new Random(0); // подсмотрел
+             // подсмотрел
         }
         /// <summary>
         /// 
@@ -47,9 +51,41 @@ namespace Asteroids
             Height = form.ClientSize.Height;
             // Связываем буфер в памяти с графическим объектом,
             // чтобы рисовать в буфере
-            Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));   
+            Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
+            form.KeyDown += Form_KeyDown;
+            //_player.Action += Player_Action;
+            energyLabel.Height = 100;
+            energyLabel.Width = 100;
+            energyLabel.Text = "100";
+            energyLabel.Left = Game.Width - 100;
+            energyLabel.Top = 100;
+            energyLabel.BackColor = Color.White;
+            energyLabel.ForeColor = Color.Black;
+            energyLabel.AutoSize = true;
+            form.Controls.Add(energyLabel);
             Load(); // сам написал
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                _bullets.Add(new Bullet(new Point(_player.Rect.X + 10, _player.Rect.Y + 10), new Point(50, 0), new Size(40, 10)));
+                Console.WriteLine("button Space");
+            }
+            if (e.KeyCode == Keys.Up) _player.Up();
+            if (e.KeyCode == Keys.Down) _player.Down();
+            if (e.KeyCode == Keys.Left) _player.Left();
+            if (e.KeyCode == Keys.Right) _player.Right();
+
+        }
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,16 +108,20 @@ namespace Asteroids
             //Buffer.Render();
 
             //Buffer.Graphics.Clear(Color.Black); // не нужна когда есть фон
-            Buffer.Graphics.DrawImage(space, 0, 0, Width, Height);
+            Buffer.Graphics.DrawImage(spacePic, 0, 0, Width, Height);
             foreach (BaseObject obj in _objs)
             {
                 obj.Draw();
             }
             foreach (Asteroid ast in _asteroids)
-            {
-                ast.Draw();
+            {                
+                ast?.Draw();
             }
-            _bullet.Draw();
+            foreach (Bullet bullet in _bullets)
+            {
+                bullet?.Draw();
+            }
+            
             _player.Draw();
 
             Buffer.Render();
@@ -91,9 +131,9 @@ namespace Asteroids
         /// </summary>
         public static void Load()
         {
-            _objs = new BaseObject[30];
-            _bullet = new Bullet(new Point(0, 200), new Point(50, 0), new Size(40, 10));
+            _objs = new BaseObject[30];            
             _asteroids = new Asteroid[30];
+            _bullets = new List<Bullet>(0);
 
             int objSize, objSpeed, objSpeed2;
             for (int i = 0; i < 26; i++)
@@ -105,22 +145,23 @@ namespace Asteroids
             for (int i = 26; i < 30; i++)
             {
                 objSize = rnd.Next(300, 600);
-                objSpeed = rnd.Next(1, 5);
+                objSpeed = rnd.Next(1, 3);
                 _objs[i] = new Planet(new Point(Game.Width + rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed), new Size(objSize, objSize));
             }
             for (int i = 0; i < _asteroids.Length; i++)
             {
                 objSize = rnd.Next(30, 40);
-                objSpeed = rnd.Next(2, 5);
-                objSpeed2 = 0; // rnd.Next(2, 5);
+                objSpeed = rnd.Next(-5, -3);
+                objSpeed2 = rnd.Next(-1, 2);
                 //if (objSpeed == 0) objSpeed = 2;
                 //if (objSpeed2 == 0) objSpeed2 = 2;
                 //_objs[i] = new Asteroid(new Point(rnd.Next(Game.Width), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed2), new Size(objSize, objSize));
-                _asteroids[i] = new Asteroid(new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(-objSpeed, objSpeed2), new Size(objSize, objSize));
+                _asteroids[i] = new Asteroid(new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(objSpeed, objSpeed2), new Size(objSize, objSize));
             }
 
-            _player = new Player(new Point(10, Game.Height/2), new Point(0, 2), new Size(100, 60));
-            
+            _player = new Player(new Point(10, Game.Height/2), new Point(0, 0), new Size(100, 60));
+
+            energyLabel.Show();
             /*for (int i = 0; i < _objs.Length / 2; i++)
                 _objs[i] = new Asteroid(new Point(600, i * 20), new Point(-i-2, -i-2), new Size(rnd.Next(10), rnd.Next(50)));
             for (int i = _objs.Length / 2; i < _objs.Length; i++)
@@ -139,22 +180,54 @@ namespace Asteroids
         /// 
         /// </summary>
         public static void Update()
-        {
+        {            
             foreach (BaseObject obj in _objs)
             {
                 obj.Update();
             }
             
-            foreach (Asteroid ast in _asteroids)
+            for(int ast = 0; ast < _asteroids.Length; ast++)
             {
-                ast.Update();
-                if(ast.Collision(_bullet))
+                _asteroids[ast]?.Update();
+                if (_asteroids[ast] != null && _asteroids[ast].Collision(_player))
                 {
-                    System.Media.SystemSounds.Hand.Play();                    
+                    _player.Energy -= _asteroids[ast].Power;
+                    energyLabel.Text = _player.Energy.ToString();
+                    energyLabel.Update();
+                    Console.WriteLine("asteroid hit player");
+                    System.Media.SystemSounds.Beep.Play();
+                    _asteroids[ast] = new Asteroid(new Point((Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(rnd.Next(-5, -3), rnd.Next(-1, 2)), new Size(rnd.Next(30, 40), rnd.Next(30, 40)));
+                    Console.WriteLine("created new asteroid");
                 }
+                    for (int i = 0; i < _bullets.Count; i++)
+                {
+                    if (_asteroids[ast] != null && _asteroids[ast].Collision(_bullets[i]))
+                    {
+                        Console.WriteLine("bullet hit asteroid");
+                        System.Media.SystemSounds.Asterisk.Play();
+                        _bullets.RemoveAt(i);
+                        _asteroids[ast] = new Asteroid(new Point((Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(rnd.Next(-5, -3), rnd.Next(-1, 2)), new Size(rnd.Next(30, 40), rnd.Next(30, 40)));
+                        Console.WriteLine("created new asteroid");
+                        _player.PlayerDead();
+                    }
+                }                
             }
-            _bullet.Update();
-            _player.Update();
+            for (int i = 0; i < _bullets.Count; i++)
+            {
+                _bullets[i].Update();
+                if (_bullets[i].Rect.X > Game.Width)
+                {
+                    _bullets.RemoveAt(i);
+                    Console.WriteLine("bullet out of screen -> deleted");
+                }
+
+            }
+            if (_player.Energy > 0)
+            {
+
+                _player.Update();
+            }
+            else _player.PlayerDead();
         }
     }
 

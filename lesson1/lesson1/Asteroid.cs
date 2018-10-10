@@ -9,7 +9,7 @@ namespace Asteroids
 {
     class Asteroid : BaseObject, ICloneable
     {
-        Image asteroid;
+        Image asteroidPic;
         public int Power;
         //Image asteroid2 = Properties.Resources.aster2;
         /// <summary>
@@ -24,10 +24,10 @@ namespace Asteroids
             switch (rnd.Next(1, 3))
             {
                 case 1:
-                    asteroid = Properties.Resources.aster1;
+                    asteroidPic = Properties.Resources.aster1;
                     break;
                 default:
-                    asteroid = Properties.Resources.aster2;
+                    asteroidPic = Properties.Resources.aster2;
                     break;
             }
 
@@ -37,7 +37,7 @@ namespace Asteroids
         /// </summary>
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(asteroid, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(asteroidPic, Pos.X, Pos.Y, Size.Width, Size.Height);
             // Game.Buffer.Graphics.DrawImage(asteroid2, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         /// <summary>
@@ -47,19 +47,28 @@ namespace Asteroids
         {
             Pos.X = Pos.X + Dir.X;
             if (Pos.X < 0 - Size.Width)
-                //Dir.X = -Dir.X;
+            {
                 Pos.X = Game.Width;
-            if (Pos.X > Game.Width + Size.Width)
-                //Dir.X = -Dir.X;
-                Pos.X = -Size.Width;
+                Pos.Y = rnd.Next(Game.Height - Size.Height);
+                Dir.X = rnd.Next(-5, -2);
+            }
+
+            /*if (Pos.X > Game.Width + Size.Width)
+            {//Dir.X = -Dir.X;
+                Pos.X = -Size.Width;    // для астероидов, летящих в разных направлениях
+            }*/   
 
             Pos.Y = Pos.Y + Dir.Y;
             if (Pos.Y < 0 - Size.Height)
+            {
                 //Dir.Y = -Dir.Y;
                 Pos.Y = Game.Height;
+            }
             if (Pos.Y > Game.Height + Size.Height)
+            {
                 //Dir.Y = -Dir.Y;
                 Pos.Y = -Size.Height;
+            }
         }
         /// <summary>
         /// 

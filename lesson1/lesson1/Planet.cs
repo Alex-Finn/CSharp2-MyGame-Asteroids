@@ -9,7 +9,7 @@ namespace Asteroids
 {
     class Planet : BaseObject
     {
-        Image planet;
+        Image planetPic;
         /// <summary>
         /// 
         /// </summary>
@@ -21,16 +21,16 @@ namespace Asteroids
             switch (rnd.Next(1, 5))
             {                
                 case 1:
-                    planet = Properties.Resources.planet2;
+                    planetPic = Properties.Resources.planet2;
                     break;
                 case 2:
-                    planet = Properties.Resources.planet3;
+                    planetPic = Properties.Resources.planet3;
                     break;
                 case 3:
-                    planet = Properties.Resources.planet4;
+                    planetPic = Properties.Resources.planet4;
                     break;
                 default:
-                    planet = Properties.Resources.planet1;
+                    planetPic = Properties.Resources.planet1;
                     break;
             }
         }
@@ -39,7 +39,7 @@ namespace Asteroids
         /// </summary>
         public override void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(planet, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(planetPic, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         /// <summary>
         /// 
