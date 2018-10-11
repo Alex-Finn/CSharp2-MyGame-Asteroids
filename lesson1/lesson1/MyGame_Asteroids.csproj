@@ -63,6 +63,7 @@
     <Compile Include="BaseObject.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Healer.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Player.cs" />
@@ -73,7 +74,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen.cs" />
     <Compile Include="Star.cs" />
   </ItemGroup>
   <ItemGroup>

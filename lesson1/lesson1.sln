@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame_Asteroids", "lesson1\MyGame_Asteroids.csproj", "{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "les_3", "les_3\les_3.csproj", "{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

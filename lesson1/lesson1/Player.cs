@@ -10,7 +10,24 @@ namespace Asteroids
 {
     class Player : BaseObject
     {
-        public int Energy { get; set; }
+        private int _energy = 100;
+        public int Energy
+        {
+            get { return _energy; }
+            set { _energy = value; }
+        }
+
+        private int _frags = 0;
+        public int Frags
+        {
+            get { return _frags; }
+            set { _frags = value; }
+        }
+
+        public void MinusEnergy(int value)
+        {
+            _energy -= value;
+        }
 
         static Image playerPic;
         /// <summary>
@@ -21,8 +38,7 @@ namespace Asteroids
         /// <param name="size"></param>
         public Player(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
-            playerPic = Properties.Resources.redtesla;
-            Energy = 100;
+            playerPic = Properties.Resources.redtesla;            
         }
         /// <summary>
         /// 
@@ -36,13 +52,13 @@ namespace Asteroids
         /// </summary>
         public override void Update()
         {
-            Pos.Y = Pos.Y - Dir.Y;
+            //Pos.Y = Pos.Y - Dir.Y;
             if (Pos.Y > Game.Height - Size.Height)
                 Pos.Y = Game.Height - Size.Height;
             if (Pos.Y < 0)
                 Pos.Y = 0;
 
-            Pos.X = Pos.X - Dir.X;
+            //Pos.X = Pos.X - Dir.X;
             if (Pos.X < 0)
                 Pos.X = 0;
             if (Pos.X > Game.Width - Size.Width)
@@ -51,30 +67,45 @@ namespace Asteroids
 
         internal void Up()
         {
-            Pos.Y = Pos.Y - 10;
-            Console.WriteLine("button Up");
+            if (Pos.Y > 0)
+            {
+                Pos.Y = Pos.Y - Dir.Y;
+                Console.WriteLine("button Up");
+            }
         }
 
         internal void Down()
         {
-            Pos.Y = Pos.Y + 10;
-            Console.WriteLine("button Down");
+            if (Pos.Y < Game.Height)
+            {
+                Pos.Y = Pos.Y + Dir.Y;
+                Console.WriteLine("button Down");
+            }
         }
 
         internal void Left()
         {
-            Pos.X = Pos.X - 10;
-            Console.WriteLine("button Left");
+            if (Pos.X > 0)
+            {
+                Pos.X = Pos.X - Dir.Y;
+                Console.WriteLine("button Left");
+            }
         }
 
         internal void Right()
         {
-            Pos.X = Pos.X + 10;
-            Console.WriteLine("button Right");
+            if (Pos.X < Game.Width)
+            {
+                Pos.X = Pos.X + Dir.Y;
+                Console.WriteLine("button Right");
+            }
         }
+
+        public static event Message MessageDie;
 
         public void PlayerDead()
         {
+            MessageDie?.Invoke();
             Console.WriteLine("energy less than 1. game over");                     
         }
     }

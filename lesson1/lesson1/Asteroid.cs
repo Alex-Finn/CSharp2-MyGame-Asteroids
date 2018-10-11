@@ -7,10 +7,11 @@ using System.Drawing;
 
 namespace Asteroids
 {
-    class Asteroid : BaseObject, ICloneable
+    class Asteroid : BaseObject, ICloneable, IComparable
     {
         Image asteroidPic;
         public int Power;
+        
         //Image asteroid2 = Properties.Resources.aster2;
         /// <summary>
         /// 
@@ -20,7 +21,7 @@ namespace Asteroids
         /// <param name="size"></param>
         public Asteroid(Point pos, Point dir, Size size):base(pos, dir, size)
         {
-            Power = 1;
+            Power = rnd.Next(1,10);
             switch (rnd.Next(1, 3))
             {
                 case 1:
@@ -50,7 +51,7 @@ namespace Asteroids
             {
                 Pos.X = Game.Width;
                 Pos.Y = rnd.Next(Game.Height - Size.Height);
-                Dir.X = rnd.Next(-5, -2);
+                Dir.X = rnd.Next(-3, 0);
             }
 
             /*if (Pos.X > Game.Width + Size.Width)
@@ -77,9 +78,31 @@ namespace Asteroids
         public object Clone()
         {
             // создаем копию астероида
-            Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height));
+            Asteroid asteroid = 
+                new Asteroid(
+                    new Point(Pos.X, Pos.Y),
+                    new Point(Dir.X, Dir.Y),
+                    new Size(Size.Width, Size.Height)) {Power = Power};
             //Не забываем скопировать новому астероиду Power нашего астероида
             return asteroid;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if(obj is Asteroid temp)
+            {
+                if (Power > temp.Power)
+                {
+                    return 1;
+                }
+                if (Power < temp.Power)
+                {
+                    return -1;
+                }
+                else
+                    return 0;
+            }
+            throw new ArgumentException("Parameter is not Asteroid!");
         }
     }
 }
