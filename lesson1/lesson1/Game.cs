@@ -102,8 +102,7 @@ namespace Asteroids
                     new Size(50, 50));
                 Console.WriteLine("debug -> created healer");
             }
-
-    }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -151,7 +150,9 @@ namespace Asteroids
             if (_player != null)
             {
                 Buffer.Graphics.DrawString("Energy: " + _player.Energy, SystemFonts.DefaultFont, Brushes.White, _player.Rect.X, _player.Rect.Y - 20);
-                Buffer.Graphics.DrawString("Frags: " + _player.Frags, new Font(FontFamily.GenericSansSerif, 20, FontStyle.Underline), Brushes.Wheat, 10, 10);
+                Buffer.Graphics.DrawString("Frags: " + _player.Frags, new Font(FontFamily.GenericSansSerif, 20, FontStyle.Underline), Brushes.Wheat, 10, 20);
+                Buffer.Graphics.DrawString("LEFT,RIGHT,UP,DOWN - movement, SPACE - fire", new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular), Brushes.WhiteSmoke, 10, 2);
+
             }
             Buffer.Render();
         }   
