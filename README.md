@@ -1,2 +1,6 @@
-# CSharp2-lesson1
-Geekbrains. C#2. Lesson1
+# CSharp2
+Geekbrains. C#2. 
+
+Author - Elshin AL
+
+3 ДЗ
