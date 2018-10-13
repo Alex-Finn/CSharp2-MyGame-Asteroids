@@ -85,6 +85,13 @@ namespace Asteroids
                     new Size(20, 5)));
                 Console.WriteLine("button Space");
             }
+
+            /*
+             * Попробовать реализовать управление через делегаты.
+             * Событие - нажатие кнопки
+             * действие - вызов метода   
+             * 
+             * */
             if (e.KeyCode == Keys.Up) _player.Up();
             if (e.KeyCode == Keys.Down) _player.Down();
             if (e.KeyCode == Keys.Left) _player.Left();
