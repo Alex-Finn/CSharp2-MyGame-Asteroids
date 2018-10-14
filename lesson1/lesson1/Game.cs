@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace Asteroids
 {
     static class Game
-    {
+    {       
         private static Timer _timer = new Timer();
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -21,11 +21,11 @@ namespace Asteroids
         private static Player _player;
         private static Healer _healer;
 
-        public static Random rnd = new Random(0); // подсмотрел
+        public static Random rnd = new Random(0); 
         public static Image spacePic = Properties.Resources.space;
 
-        //public static Label energyLabel = new Label();
-        
+        private static int asteroidCount = 30;
+
         /// <summary>
         /// 
         /// </summary>
@@ -169,8 +169,8 @@ namespace Asteroids
         public static void Load()
         {
             _objs = new BaseObject[30];            
-            _asteroids = new Asteroid[30];
-            _bullets = new List<Bullet>(0);
+            _asteroids = new Asteroid[asteroidCount];
+            _bullets = new List<Bullet>();
 
             int objSize, objSpeed, objSpeed2;
             for (int i = 0; i < 26; i++)
@@ -234,53 +234,51 @@ namespace Asteroids
             {
                 obj.Update();
             }
-            
+
             for (int ast = 0; ast < _asteroids.Length; ast++)
             {
-                _asteroids[ast]?.Update();
-                if (_asteroids[ast] != null && _asteroids[ast].Collision(_player))
+                if (_asteroids[ast] == null)
+                    continue;
+                _asteroids[ast].Update();
+
+                for (int bul = 0; bul < _bullets.Count; bul++)
                 {
-                    _player?.MinusEnergy(_asteroids[ast].Power);
-                    if (_player?.Energy <= 0)
-                    {
-                        _player?.PlayerDead();
-                    }
-                    //energyLabel.Text = _player.Energy.ToString();
-                    //energyLabel.Update();
-                    Console.WriteLine("asteroid hit player");
-                    System.Media.SystemSounds.Beep.Play();
-                    _asteroids[ast] = new Asteroid(
-                        new Point((Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), 
-                        new Point(rnd.Next(-3, 0), rnd.Next(-1, 2)), 
-                        new Size(rnd.Next(30, 40), rnd.Next(30, 40)));
-                    Console.WriteLine("created new asteroid");
-                }
-                for (int i = 0; i < _bullets.Count; i++)
-                {
-                    if (_asteroids[ast] != null && _asteroids[ast].Collision(_bullets[i]))
+                    if (_asteroids[ast] != null && _bullets[bul].Collision(_asteroids[ast]))
                     {
                         _asteroids[ast].Power--;
                         Console.WriteLine("bullet hit asteroid");
                         System.Media.SystemSounds.Asterisk.Play();
-                        _bullets.RemoveAt(i);
+                        _bullets.RemoveAt(bul);
                         if (_asteroids[ast].Power < 1)
                         {
                             _player.Frags++;
                             Console.WriteLine("asteroid deleted");
-                            _asteroids[ast] = new Asteroid(new Point((Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)), new Point(rnd.Next(-5, -3), rnd.Next(-1, 2)), new Size(rnd.Next(30, 40), rnd.Next(30, 40)));
-                            Console.WriteLine("created new asteroid");
-                        }
-                        if (_healer == null && rnd.Next(0, 50) < 5)
-                        {
-                            _healer = new Healer(
-                                new Point((Game.Width), rnd.Next(Game.Height)),
-                                new Point(rnd.Next(-10, -5), 0),
-                                new Size(50, 50));
-                            Console.WriteLine("created healer");
+                            _asteroids[ast] = null;
                         }
                     }
                 }
+
+                if (_asteroids[ast] == null || !_player.Collision(_asteroids[ast]))
+                    continue;
+                _player?.MinusEnergy(_asteroids[ast].Power);
+                Console.WriteLine("asteroid hit player");
+                System.Media.SystemSounds.Hand.Play();
+                _asteroids[ast] = null;
+                if (_player?.Energy <= 0)
+                    {
+                        _player?.PlayerDead();
+                    }                
             }
+
+            if (_healer == null && rnd.Next(0, 700) < 5)
+            {
+                _healer = new Healer(
+                    new Point((Game.Width), rnd.Next(Game.Height)),
+                    new Point(rnd.Next(-10, -5), 0),
+                    new Size(50, 50));
+                Console.WriteLine("created healer");
+            }
+
             for (int i = 0; i < _bullets.Count; i++)
             {
                 _bullets[i].Update();
@@ -290,6 +288,7 @@ namespace Asteroids
                     Console.WriteLine("bullet out of screen -> deleted");
                 }
             }
+
             if (_player?.Energy > 0)
             {
                 _player.Update();
@@ -306,6 +305,7 @@ namespace Asteroids
                     else
                         _player.Energy +=_healer.Power;
                     _healer = null;
+                    System.Media.SystemSounds.Beep.Play();
                     Console.WriteLine("healer was used -> deleted");
                     return;
                 }
@@ -315,6 +315,28 @@ namespace Asteroids
                     Console.WriteLine("healer out of screen -> deleted");
                 }
             }
+            
+            for (int i = 0; i < _asteroids.Length; i++)
+            {
+                if (i == asteroidCount - 1)
+                {
+                    asteroidCount++;
+                    _asteroids = new Asteroid[asteroidCount];
+                    for (int j = 0; j < asteroidCount; j++)
+                    {
+                        int objSize = rnd.Next(30, 40);
+                        int objSpeed = rnd.Next(-3, 0);
+                        int objSpeed2 = rnd.Next(-1, 2);
+                        _asteroids[j] = new Asteroid(
+                            new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)),
+                            new Point(objSpeed, objSpeed2),
+                            new Size(objSize, objSize));
+                    }
+                    break;
+                }
+                if (_asteroids[i] == null) continue;       
+                else break;
+            }            
         }
         /// <summary>
         /// 
