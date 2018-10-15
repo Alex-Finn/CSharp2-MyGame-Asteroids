@@ -25,6 +25,7 @@ namespace Asteroids
         public static Image spacePic = Properties.Resources.space;
 
         private static int asteroidCount = 30;
+        private static int asteroidsRemain = asteroidCount;
 
         /// <summary>
         /// 
@@ -159,7 +160,7 @@ namespace Asteroids
                 Buffer.Graphics.DrawString("Energy: " + _player.Energy, SystemFonts.DefaultFont, Brushes.White, _player.Rect.X, _player.Rect.Y - 20);
                 Buffer.Graphics.DrawString("Frags: " + _player.Frags, new Font(FontFamily.GenericSansSerif, 20, FontStyle.Underline), Brushes.Wheat, 10, 20);
                 Buffer.Graphics.DrawString("LEFT,RIGHT,UP,DOWN - movement, SPACE - fire", new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular), Brushes.WhiteSmoke, 10, 2);
-
+                Buffer.Graphics.DrawString(("Asteroids count: " + asteroidsRemain + " from " + asteroidCount), new Font(FontFamily.GenericSansSerif, 20, FontStyle.Regular), Brushes.Wheat, 150, 20);
             }
             Buffer.Render();
         }   
@@ -254,6 +255,7 @@ namespace Asteroids
                             _player.Frags++;
                             Console.WriteLine("asteroid deleted");
                             _asteroids[ast] = null;
+                            asteroidsRemain--;
                         }
                     }
                 }
@@ -264,6 +266,7 @@ namespace Asteroids
                 Console.WriteLine("asteroid hit player");
                 System.Media.SystemSounds.Hand.Play();
                 _asteroids[ast] = null;
+                asteroidsRemain--;
                 if (_player?.Energy <= 0)
                     {
                         _player?.PlayerDead();
@@ -321,6 +324,7 @@ namespace Asteroids
                 if (i == asteroidCount - 1)
                 {
                     asteroidCount++;
+                    asteroidsRemain = asteroidCount;
                     _asteroids = new Asteroid[asteroidCount];
                     for (int j = 0; j < asteroidCount; j++)
                     {
@@ -328,7 +332,7 @@ namespace Asteroids
                         int objSpeed = rnd.Next(-3, 0);
                         int objSpeed2 = rnd.Next(-1, 2);
                         _asteroids[j] = new Asteroid(
-                            new Point(rnd.Next(Game.Width + rnd.Next(Game.Width)), rnd.Next(Game.Height)),
+                            new Point(rnd.Next(Game.Width, (Game.Width + rnd.Next(Game.Width))), rnd.Next(Game.Height)),
                             new Point(objSpeed, objSpeed2),
                             new Size(objSize, objSize));
                     }
