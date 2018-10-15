@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame_Asteroids", "lesson1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "les_3", "les_3\les_3.csproj", "{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_2", "homework_lesson_4\homework_4_2.csproj", "{D4EDDE8F-25A1-4694-99A4-3D78B611302A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_3", "Lesson_4.3\homework_4_3.csproj", "{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F7D7E9-A79D-4533-B49B-3DD68C53C93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EDDE8F-25A1-4694-99A4-3D78B611302A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EDDE8F-25A1-4694-99A4-3D78B611302A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EDDE8F-25A1-4694-99A4-3D78B611302A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EDDE8F-25A1-4694-99A4-3D78B611302A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
