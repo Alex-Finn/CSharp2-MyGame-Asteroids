@@ -41,6 +41,7 @@ namespace homework_4_3
             {
                 Console.WriteLine($"{pair.Key} - {pair.Value}");
             }
+            Console.ReadKey();
         }
     }
     #endregion
@@ -78,5 +79,5 @@ namespace homework_4_3
     //        return sorteddict;
     //    }        
     //}
-    #endregion
+    #endregion    
 }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame_Asteroids", "lesson1\MyGame_Asteroids.csproj", "{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame_Asteroids", "Asteroids\MyGame_Asteroids.csproj", "{0666481A-6FAC-4D29-A86C-3B7FE6BB4B6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_2", "homework_lesson_4\homework_4_2.csproj", "{D4EDDE8F-25A1-4694-99A4-3D78B611302A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_2", "homework_4_2\homework_4_2.csproj", "{D4EDDE8F-25A1-4694-99A4-3D78B611302A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_3", "Lesson_4.3\homework_4_3.csproj", "{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "homework_4_3", "Lesson_4_3\homework_4_3.csproj", "{784908EC-F0BF-41E8-BE62-3BBAD1424FD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
