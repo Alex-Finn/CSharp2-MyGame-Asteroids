@@ -16,9 +16,9 @@ namespace Asteroids
         public static int Height { get; set; }
 
         public static BaseObject[] _objs;
-        private static List<Bullet> _bullets;
+        public static List<Bullet> _bullets;
         private static Asteroid[] _asteroids;
-        private static Player _player;
+        public static Player _player;
         private static Healer _healer;
 
         public static Random rnd = new Random(0); 
@@ -47,7 +47,7 @@ namespace Asteroids
             // графическое устройство для вывода графики
             Graphics g;
             // предоставляет доступ к главному буферу 
-            // графического контекста для текущего приложения
+            // графического контекста для текущего приложенияForm_KeyDown
             _context = BufferedGraphicsManager.Current;
             g = form.CreateGraphics();
             // Создаем объект (поверхность рисования) и связываем его с формой
@@ -58,6 +58,8 @@ namespace Asteroids
             // чтобы рисовать в буфере
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             form.KeyDown += Form_KeyDown;
+            form.KeyDown += Player.UpdateOnKeyDown;
+            form.KeyUp += Player.UpdateOnKeyUp;
             Player.MessageDie += Finish;
             //_player.Action += Player_Action;
             /*energyLabel.Height = 100;
@@ -76,16 +78,16 @@ namespace Asteroids
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void Form_KeyDown(object sender, KeyEventArgs e)
+       private static void Form_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
+           /* if (e.KeyCode == Keys.Space)
             {
                 _bullets.Add(new Bullet(
                     new Point(_player.Rect.X + 10, _player.Rect.Y + 10), 
                     new Point(50, 0), 
                     new Size(20, 5)));
                 Console.WriteLine("button Space");
-            }
+            }*/
 
             /*
              * Попробовать реализовать управление через делегаты.
@@ -93,10 +95,10 @@ namespace Asteroids
              * действие - вызов метода   
              * 
              * */
-            if (e.KeyCode == Keys.Up) _player.Up();
+           /* if (e.KeyCode == Keys.Up) _player.Up();
             if (e.KeyCode == Keys.Down) _player.Down();
             if (e.KeyCode == Keys.Left) _player.Left();
-            if (e.KeyCode == Keys.Right) _player.Right();
+            if (e.KeyCode == Keys.Right) _player.Right();*/
             if (e.KeyCode == Keys.D)
             {
                 _player.PlayerDead(); // для отладки проигрыша
@@ -110,6 +112,12 @@ namespace Asteroids
                     new Size(50, 50));
                 Console.WriteLine("debug -> created healer");
             }
+            if (e.KeyCode == Keys.Escape)
+            {
+                Form.ActiveForm.Close(); // остановка приложения
+                Console.WriteLine("force close application");
+            }
+            
         }
         /// <summary>
         /// 

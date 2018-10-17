@@ -24,6 +24,8 @@ namespace Asteroids
             set { _frags = value; }
         }
 
+        private static int MoveX, MoveY;
+
         public void MinusEnergy(int value)
         {
             _energy -= value;
@@ -52,19 +54,74 @@ namespace Asteroids
         /// </summary>
         public override void Update()
         {
-            //Pos.Y = Pos.Y - Dir.Y;
+            Pos.Y = Pos.Y + MoveY;
             if (Pos.Y > Game.Height - Size.Height)
                 Pos.Y = Game.Height - Size.Height;
             if (Pos.Y < 0)
                 Pos.Y = 0;
 
-            //Pos.X = Pos.X - Dir.X;
+            Pos.X = Pos.X + MoveX;
             if (Pos.X < 0)
                 Pos.X = 0;
             if (Pos.X > Game.Width - Size.Width)
                 Pos.X = Game.Width - Size.Width;
         }
 
+        public static void UpdateOnKeyDown(object sender, KeyEventArgs e)
+        {
+            int speed = 10;
+
+            switch (e.KeyData)
+            {
+                case Keys.Up:
+                    MoveY = -speed;
+                    break;
+                case Keys.Down:
+                    MoveY = speed;
+                    break;
+                case Keys.Left:
+                    MoveX = -speed;
+                    break;
+                case Keys.Right:
+                    MoveX = speed;
+                    break;
+                case Keys.Space:
+                    Game._bullets.Add(new Bullet(
+                        new Point(Game._player.Rect.X + 10, Game._player.Rect.Y + 10),
+                        new Point(50, 0),
+                        new Size(20, 5)));
+                    //Console.WriteLine("button Space");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Method for KeyUp event
+        /// </summary>
+        /// <param name="e">KeyEventArgs</param>
+        public static void UpdateOnKeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Up:
+                    MoveY = 0;
+                    break;
+                case Keys.Down:
+                    MoveY = 0;
+                    break;
+                case Keys.Left:
+                    MoveX = 0;
+                    break;
+                case Keys.Right:
+                    MoveX = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+        /*
         internal void Up()
         {
             if (Pos.Y > 0)
@@ -99,7 +156,7 @@ namespace Asteroids
                 Pos.X = Pos.X + Dir.Y;
                 Console.WriteLine("button Right");
             }
-        }
+        }*/
 
         public static event Message MessageDie;
 
