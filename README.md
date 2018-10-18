@@ -1,2 +1,2 @@
-# CSharp2-lesson1
-Geekbrains. C#2. Lesson1
+# CSharp2 - Elshin AL
+Geekbrains. C#2. Lesson5 - WPF
