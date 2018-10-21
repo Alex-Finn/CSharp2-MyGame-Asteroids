@@ -28,12 +28,22 @@ namespace lesson_5
     ////либо на форме редактирования, либо сделать новую форму.
 
 
+    /*Полный аут. Синтаксис связывания не логичный ни разу. Связать комбобокс со списком департаментов так и не вышло.
+     * Из-за пустой траты времени не хватило нормально сделать изменение данных через новую форму.
+     * Примеры в сети бесполезные, сделать также не выходит.
+     * upd: пришлось повозиться и вроде сделал изменение данных
+     * однако изменение департамента вызывает ошибку (закоментировал этот код)
+     * возможно это из-за того как именно использую привязку для департаментов
+
+
+
+    */
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Employee> employees = new
+        public static ObservableCollection<Employee> employees = new
         ObservableCollection<Employee>();
         public static ObservableCollection<Department> depts = new
         ObservableCollection<Department>();
@@ -69,7 +79,7 @@ namespace lesson_5
             AddNewEmployee();
             AddNewEmployee();
             AddNewEmployee();
-            
+
 
             lv_employees.ItemsSource = employees;
             //cbDepartments.ItemsSource = depts;
@@ -77,11 +87,11 @@ namespace lesson_5
         void AddNewEmployee()
         {
             employees.Add(new Employee(
-                ++count_emp_id, 
-                "Name_" + count_emp_id, 
-                rnd.Next(18, 66), 
-                2500 + rnd.NextDouble() * 7500, 
-                depts[rnd.Next(0,5)]));
+                ++count_emp_id,
+                "Name_" + count_emp_id,
+                rnd.Next(18, 66),
+                2500 + rnd.NextDouble() * 7500,
+                depts[rnd.Next(0, 5)]));
         }
 
         void AddNewDepartment()
@@ -106,13 +116,12 @@ namespace lesson_5
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             if (editemployee.Name != null)
-            {                
+            {
                 Edit_Form edit_Form = new Edit_Form(editemployee);
                 edit_Form.Owner = this;
                 edit_Form.ShowDialog();
             }
         }
-
         private void lv_employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             editemployee = e.AddedItems[0] as Employee;
@@ -128,62 +137,5 @@ namespace lesson_5
                 edit_Form.ShowDialog();
             }
         }
-    }
-
-    public class Department
-    {        
-        public int Dept_Id { get; set; }
-        public Department(int _id)
-        {
-            Dept_Id = _id;
-        }
-        /// <summary>
-        /// default cotr
-        /// </summary>
-        public Department()
-        {          
-        }
-
-        public override string ToString()
-        {
-            return $"Department {Dept_Id}";
-        }
-    }
-
-    public class Employee
-    {
-        public int Emp_Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public double Salary { get; set; }
-        public Department Emp_dept { get; set; }
-        /// <summary>
-        /// Cotr with parameters
-        /// </summary>
-        /// <param name="id">inkrement id</param>
-        /// <param name="_name">name</param>
-        /// <param name="_age">age</param>
-        /// <param name="_salary">salary</param>
-        public Employee(int id, string _name, int _age, double _salary, Department department)
-        {
-            //MainWindow.count_emp_id++;
-            Emp_Id = id;            
-            Name = _name;
-            Age = _age;
-            Salary = _salary;
-            Emp_dept = department; 
-        }
-        /// <summary>
-        /// default cotr
-        /// </summary>
-        public Employee()
-        {
-            //MainWindow.count_emp_id++;
-        }
-
-        public override string ToString()
-        {
-            return $"ID: {Emp_Id}\nName: {Name}\nAge: {Age}\nSalary: {Salary:0}\nDepartment: {Emp_dept}";
-        }
-    }
+    }     
 }

@@ -20,8 +20,9 @@ namespace lesson_5
     public partial class Edit_Form : Window
     {
         Binding s = new Binding();
-        
+
         public Edit_Form(Employee employee)
+        
         {
             InitializeComponent();
             /*Binding binding = new Binding();
@@ -32,11 +33,12 @@ namespace lesson_5
             cb_edit_department.SetBinding(TextBlock.TextProperty, binding);
             // Установка привязки для элемента-приемника*/
             maingridedit.DataContext = employee;
-            FillData(employee);            
+            cb_edit_department.ItemsSource = MainWindow.depts;
+            FillData();            
         }
         
 
-        private static void FillData(Employee employee)
+        private static void FillData()
         {
         }
 
@@ -47,13 +49,29 @@ namespace lesson_5
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("button cancel");
+            //MessageBox.Show("button cancel");
             this.Close();
         }
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("button save");
+            //MessageBox.Show("button save");
+            BindingExpression binding_id =
+                tb_edit_id.GetBindingExpression(TextBox.TextProperty);
+            binding_id.UpdateSource();
+            BindingExpression binding_name =
+                 tb_edit_name.GetBindingExpression(TextBox.TextProperty);
+            binding_name.UpdateSource();
+            BindingExpression binding_age =
+                 tb_edit_age.GetBindingExpression(TextBox.TextProperty);
+            binding_age.UpdateSource();
+            BindingExpression binding_salary =
+                 tb_edit_salary.GetBindingExpression(TextBox.TextProperty);
+            binding_salary.UpdateSource();
+            /*BindingExpression binding_dept =
+               cb_edit_department.GetBindingExpression(TextBox.TextProperty);
+            binding_dept.UpdateSource();*/
+
             this.Close();
         }
     }

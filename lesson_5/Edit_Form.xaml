@@ -10,30 +10,32 @@
     <Grid Name="maingridedit" Margin="0,0,-6,-8" HorizontalAlignment="Left" Width="254" Height="219"
           VerticalAlignment="Top">
         <Grid HorizontalAlignment="Left" Height="142" Margin="10,10,0,0" VerticalAlignment="Top" Width="218">
-            <TextBox Name="tb_edit_id" Text="{Binding Emp_Id, Mode=OneWay}" HorizontalAlignment="Left" Height="23" 
+            <TextBox Name="tb_edit_id" Text="{Binding Emp_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" 
                      Margin="98,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" Text="ID" 
                        VerticalAlignment="Top" Height="21" Width="83"/>
-            <TextBox Name="tb_edit_name" Text="{Binding Name, Mode=OneWay}" HorizontalAlignment="Left" Height="23" 
+            <TextBox Name="tb_edit_name" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
                      Margin="98,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="Name" 
                        VerticalAlignment="Top" Height="21" Width="83"/>
-            <TextBox Name="tb_edit_age" Text="{Binding Age, Mode=OneWay}" HorizontalAlignment="Left" Height="23" 
+            <TextBox Name="tb_edit_age" Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
                      Margin="98,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,65,0,0" TextWrapping="Wrap" Text="Age" 
                        VerticalAlignment="Top" Height="21" Width="83"/>
-            <TextBox Name="tb_edit_salary" Text="{Binding Salary, Mode=OneWay}" HorizontalAlignment="Left" Height="23" 
+            <TextBox Name="tb_edit_salary" Text="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
                      Margin="98,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,91,0,0" TextWrapping="Wrap" Text="Salary" 
                        VerticalAlignment="Top" Height="21" Width="83"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
                        Height="21" Width="83" Text="Department" />
-            <ComboBox  Name="cb_edit_department" HorizontalAlignment="Left"
-                       ItemsSource="{Binding MainWindow.depts}"
+            <ComboBox  Name="cb_edit_department" HorizontalAlignment="Left" Text="{Binding Emp_dept, Mode=OneWay}"
+                       IsEditable="True"
                        Margin="98,117,0,0" VerticalAlignment="Top" Width="120">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Dept_Id}" />
+                        <StackPanel Orientation="Horizontal">                            
+                            <TextBlock Text="{Binding StringFormat=Department {0}, Path=Dept_Id}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
