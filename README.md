@@ -1,6 +1,6 @@
-# CSharp2
+# CSharp2 WPF
 Geekbrains. C#2. 
 
 Author - Elshin AL
 
-5 ДЗ
+6 ДЗ
