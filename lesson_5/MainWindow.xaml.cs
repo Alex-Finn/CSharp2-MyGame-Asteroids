@@ -35,7 +35,7 @@ namespace lesson_5
     {
         ObservableCollection<Employee> employees = new
         ObservableCollection<Employee>();
-        ObservableCollection<Department> depts = new
+        public static ObservableCollection<Department> depts = new
         ObservableCollection<Department>();
         Employee editemployee = new Employee();
         Random rnd = new Random();
@@ -106,8 +106,9 @@ namespace lesson_5
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             if (editemployee.Name != null)
-            {
+            {                
                 Edit_Form edit_Form = new Edit_Form(editemployee);
+                edit_Form.Owner = this;
                 edit_Form.ShowDialog();
             }
         }
@@ -115,7 +116,17 @@ namespace lesson_5
         private void lv_employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             editemployee = e.AddedItems[0] as Employee;
-            MessageBox.Show(editemployee.ToString());
+            //MessageBox.Show(editemployee.ToString());
+        }
+
+        private void Edit_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (editemployee.Name != null)
+            {
+                Edit_Form edit_Form = new Edit_Form(editemployee);
+                edit_Form.Owner = this;
+                edit_Form.ShowDialog();
+            }
         }
     }
 
@@ -135,7 +146,7 @@ namespace lesson_5
 
         public override string ToString()
         {
-            return $"Department: {Dept_Id}";
+            return $"Department {Dept_Id}";
         }
     }
 
@@ -172,7 +183,7 @@ namespace lesson_5
 
         public override string ToString()
         {
-            return $"{Emp_Id}\t{Name}\t{Age}\t{Salary:0}\t{Emp_dept}";
+            return $"ID: {Emp_Id}\nName: {Name}\nAge: {Age}\nSalary: {Salary:0}\nDepartment: {Emp_dept}";
         }
     }
 }

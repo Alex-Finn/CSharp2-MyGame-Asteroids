@@ -6,13 +6,13 @@
         xmlns:local= "clr-namespace:lesson_5"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable= "d"
-        Title = "MainWindow" Height = "350" Width = "525">
+        Title = "MainWindow" Height = "350" Width = "525" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid Background="Lavender">
-        <Button Margin= "144,0,303,10" Height= "25" Width= "70" VerticalAlignment = "Bottom"
-                Click= "Button_Click" >Добавить</Button>
-        <Button Margin= "319,0,128,10" Height= "25" Width= "70" VerticalAlignment = "Bottom"
-                Click= "Edit_Click" >Изменить</Button>
-        <ListView Name="lv_employees" HorizontalAlignment="Left" Height="247" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" RenderTransformOrigin="0.49,0.04" SelectionChanged="lv_employees_SelectionChanged">
+        <Button Margin= "140,276,307,19"
+                Click= "Button_Click" RenderTransformOrigin="0.964,-0.513" >Добавить</Button>
+        <Button Margin= "307,276,140,19"
+                Click= "Edit_Click" RenderTransformOrigin="1.243,0.505" >Изменить</Button>
+        <ListView Name="lv_employees" HorizontalAlignment="Left" Height="247" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" RenderTransformOrigin="0.49,0.04" SelectionChanged="lv_employees_SelectionChanged" MouseDoubleClick="Edit_Click">
             <ListView.View>
                 <GridView >
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Emp_Id}" Width="50" >ID</GridViewColumn>

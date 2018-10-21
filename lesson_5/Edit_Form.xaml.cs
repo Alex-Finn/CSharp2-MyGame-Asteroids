@@ -19,19 +19,42 @@ namespace lesson_5
     /// </summary>
     public partial class Edit_Form : Window
     {
+        Binding s = new Binding();
+        
         public Edit_Form(Employee employee)
         {
             InitializeComponent();
-            //cb_edit_department.ItemsSource = employee;
-            FillData(employee);
+            /*Binding binding = new Binding();
+            binding.ElementName = nameof(MainWindow.depts);
+            // Элемент-источник
+            binding.Path = new PropertyPath("Text");
+            // Свойство элемента-источника
+            cb_edit_department.SetBinding(TextBlock.TextProperty, binding);
+            // Установка привязки для элемента-приемника*/
+            maingridedit.DataContext = employee;
+            FillData(employee);            
         }
         
 
         private static void FillData(Employee employee)
         {
-            
-             
-            //ComboBox.bin
+        }
+
+        private static void cb_edit_department_SelectionChanged()
+        {
+
+        }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("button cancel");
+            this.Close();
+        }
+
+        private void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("button save");
+            this.Close();
         }
     }
 }
