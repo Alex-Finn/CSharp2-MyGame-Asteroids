@@ -1,2 +1,7 @@
-# CSharp2 - Elshin AL
-Geekbrains. C#2. Lesson5 - WPF
+
+# CSharp2 WPF
+Geekbrains. C#2. 
+
+Author - Elshin AL
+
+6 ДЗ
