@@ -1,0 +1,46 @@
+﻿<Window x:Name="Edit" x:Class="lesson_5.Edit_Form"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lesson_5"
+        mc:Ignorable="d"
+        Title="Edit employee" Height="235.5" Width="253.5" ResizeMode="NoResize" SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterOwner" WindowStyle="ThreeDBorderWindow">
+    <Grid Name="maingridedit" Margin="0,0,-6,-8" HorizontalAlignment="Left" Width="254" Height="219"
+          VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Height="142" Margin="10,10,0,0" VerticalAlignment="Top" Width="218">
+            <TextBox Name="tb_edit_id" Text="{Binding Emp_Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" 
+                     Margin="98,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" Text="ID" 
+                       VerticalAlignment="Top" Height="21" Width="83"/>
+            <TextBox Name="tb_edit_name" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
+                     Margin="98,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="Name" 
+                       VerticalAlignment="Top" Height="21" Width="83"/>
+            <TextBox Name="tb_edit_age" Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
+                     Margin="98,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,65,0,0" TextWrapping="Wrap" Text="Age" 
+                       VerticalAlignment="Top" Height="21" Width="83"/>
+            <TextBox Name="tb_edit_salary" Text="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Height="23" 
+                     Margin="98,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,91,0,0" TextWrapping="Wrap" Text="Salary" 
+                       VerticalAlignment="Top" Height="21" Width="83"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                       Height="21" Width="83" Text="Department" />
+            <ComboBox  Name="cb_edit_department" HorizontalAlignment="Left" Text="{Binding Emp_dept, Mode=OneWay}"
+                       IsEditable="True"
+                       Margin="98,117,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">                            
+                            <TextBlock Text="{Binding StringFormat=Department {0}, Path=Dept_Id}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        <Button Name="btn_save" Content="Save" HorizontalAlignment="Left" Margin="26,172,0,0" VerticalAlignment="Top" Width="76" IsDefault="True" Click="btn_save_Click"/>
+        <Button Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="130,172,0,0" VerticalAlignment="Top" Width="76" IsCancel="True" Click="btn_cancel_Click"/>
+    </Grid>
+</Window>
