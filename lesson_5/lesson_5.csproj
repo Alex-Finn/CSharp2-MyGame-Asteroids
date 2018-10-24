@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A21610C2-3E07-4461-9F9A-01A94F421E37}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>lesson_5</RootNamespace>
+    <RootNamespace>ADO</RootNamespace>
     <AssemblyName>lesson_5</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Edit_Form.xaml">
+    <Page Include="EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -68,8 +68,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Department.cs" />
-    <Compile Include="Edit_Form.xaml.cs">
-      <DependentUpon>Edit_Form.xaml</DependentUpon>
+    <Compile Include="EditWindow.xaml.cs">
+      <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="MainWindow.xaml.cs">
