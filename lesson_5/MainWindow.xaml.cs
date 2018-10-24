@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,28 +17,20 @@ using System.Windows.Shapes;
 
 namespace lesson_5
 {
-    ////    Домашнее задание
-    ////Создать WPF -приложение для ведения списка сотрудников компании.
-    ////1. Создать сущности Employee и Department и заполнить списки сущностей начальными данными.
-    ////2. Для списка сотрудников и списка департаментов предусмотреть визуализацию (отображение).
-    ////Это можно сделать, например, с использованием ComboBox или ListView.
-    ////3. Предусмотреть редактирование сотрудников и департаментов.Должна быть возможность
-    ////изменить департамент у сотрудника.Список департаментов для выбора можно выводить в
-    ////ComboBox, и все это можно выводить на дополнительной форме.
-    ////4. Предусмотреть возможность создания новых сотрудников и департаментов.Реализовать это
-    ////либо на форме редактирования, либо сделать новую форму.
+    ////    Домашнее задание 7
+    ///
+    ////    Изменить WPF-приложение для ведения списка сотрудников компании (из урока 5), используя
+    ////    связывание данных, DataGrid и ADO.NET.
+    ////    1. Создать таблицы Employee и Department в БД MSSQL Server и заполнить списки сущностей
+    ////       начальными данными.
+    ////    2. Для списка сотрудников и списка департаментов предусмотреть визуализацию (отображение).
+    ////       Это можно сделать, например, с использованием ComboBox или ListView.
+    ////    3. Предусмотреть редактирование сотрудников и департаментов.Должна быть возможность
+    ////       изменить департамент у сотрудника.Список департаментов для выбора можно выводить в
+    ////       ComboBox, и все это можно выводить на дополнительной форме.
+    ////    4. Предусмотреть возможность создания новых сотрудников и департаментов.Реализовать данную
+    ////       возможность либо на форме редактирования, либо сделать новую форму.
 
-
-    /*Полный аут. Синтаксис связывания не логичный ни разу. Связать комбобокс со списком департаментов так и не вышло.
-     * Из-за пустой траты времени не хватило нормально сделать изменение данных через новую форму.
-     * Примеры в сети бесполезные, сделать также не выходит.
-     * upd: пришлось повозиться и вроде сделал изменение данных
-     * однако изменение департамента вызывает ошибку (закоментировал этот код)
-     * возможно это из-за того как именно использую привязку для департаментов
-
-
-
-    */
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -58,45 +51,126 @@ namespace lesson_5
         }
         void FillData()
         {
-            //employees.Add(new Employee()
+            //  ============================================================
+            //  Запуск однократно для заполнения данных в таблице работников
+            //  После продумаю как не коментировать этот блок
+            //
+            //string connectionString =
+            //    @" Data source = (localdb)\MSSQLLocalDB;
+            //    initial catalog = Lesson7;
+            //    integrated security = True; 
+            //    Pooling = False";
+
+            //try
             //{
-            //    Emp_Id = 1, Name = "Vasya", Age = 22, Salary = 3000});
+            //    var random = new Random();
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        var employee = new Employee
+            //        {
+            //            Emp_Id = $"{++count_emp_id}",
+            //            Name = $"Name_{random.Next(0, 100)}",
+            //            Age = $"{random.Next(18, 100)}",
+            //            Salary = $"{random.Next(2500,7501)}",
+            //            Emp_dept = $"{random.Next(1, 6)}"
+            //        };
 
-            //employees.Add(new Employee()
+            //        var sql = $@"INSERT INTO Employee (Id, Name, Age, Salary, Department)
+            //        VALUES ('{employee.Emp_Id}', '{employee.Name}', '{employee.Age}', '{employee.Salary}', '{employee.Emp_dept}')";
+
+            //        //Console.WriteLine(sql);
+            //        //Console.WriteLine();
+
+            //        using (SqlConnection connection = new SqlConnection(connectionString))
+            //        {
+            //            connection.Open();
+
+            //            SqlCommand command = new SqlCommand(sql, connection);
+            //            command.ExecuteNonQuery();
+            //        }
+            //    }
+            //}
+            //catch (Exception e)
             //{
-            //    Emp_Id = 2, Name = "Petya", Age = 25, Salary = 6000 });
-
-            //employees.Add(new Employee()
+            //    Console.WriteLine(e.Message);
+            //}
+            //finally
             //{
-            //    Emp_Id = 3, Name = "Kolya", Age = 23, Salary = 8000 });
-            depts.Add(new Department(1));
-            depts.Add(new Department(2));
-            depts.Add(new Department(3));
-            depts.Add(new Department(4));
-            depts.Add(new Department(5));
-            AddNewEmployee();
-            AddNewEmployee();
-            AddNewEmployee();
-            AddNewEmployee();
-            AddNewEmployee();
+            //    Console.WriteLine("exit");
+            //}
+            //  ===============================================================
+            //  Запуск однократно для заполнения данных в таблице департаментов
+            //  После продумаю как не коментировать этот блок
+            //
+            //string connectionString =
+            //    @" Data source = (localdb)\MSSQLLocalDB;
+            //    initial catalog = Lesson7;
+            //    integrated security = True; 
+            //    Pooling = False";
+
+            //try
+            //{
+            //    var random = new Random();
+            //    for (int i = 0; i < 5; i++)
+            //    {
+            //        var dept = new Department
+            //        {
+            //            Dept_Id = i,
+            //            Name = $"Department"                        
+            //        };
+
+            //        var sql = $@"INSERT INTO Department (Id, Name)
+            //        VALUES ('{dept.Dept_Id}', '{dept.Name}')";
+
+            //        //Console.WriteLine(sql);
+            //        //Console.WriteLine();
+
+            //        using (SqlConnection connection = new SqlConnection(connectionString))
+            //        {
+            //            connection.Open();
+
+            //            SqlCommand command = new SqlCommand(sql, connection);
+            //            command.ExecuteNonQuery();
+            //        }
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
+            //finally
+            //{
+            //    Console.WriteLine("exit");
+            //}
+
+            //depts.Add(new Department(1));
+            //depts.Add(new Department(2));
+            //depts.Add(new Department(3));
+            //depts.Add(new Department(4));
+            //depts.Add(new Department(5));
+            //AddNewEmployee();
+            //AddNewEmployee();
+            //AddNewEmployee();
+            //AddNewEmployee();
+            //AddNewEmployee();
 
 
-            lv_employees.ItemsSource = employees;
+            //lv_employees.ItemsSource = employees;
             //cbDepartments.ItemsSource = depts;
         }
         void AddNewEmployee()
         {
-            employees.Add(new Employee(
-                ++count_emp_id,
-                "Name_" + count_emp_id,
-                rnd.Next(18, 66),
-                2500 + rnd.NextDouble() * 7500,
-                depts[rnd.Next(0, 5)]));
+            //employees.Add(new Employee(
+            //    ++count_emp_id,
+            //    "Name_" + count_emp_id,
+            //    rnd.Next(18, 66),
+            //    2500 + rnd.NextDouble() * 7500,
+            //    depts[rnd.Next(0, 5)]));
         }
 
         void AddNewDepartment()
         {
-            depts.Add(new Department(rnd.Next(1, 6)));
+            //depts.Add(new Department(rnd.Next(1, 6)));
         }
 
         //private void lv_employees_Selected (object sender, RoutedEventArgs e)

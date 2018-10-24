@@ -8,11 +8,11 @@ namespace lesson_5
 {
     public class Employee
     {
-        public int Emp_Id { get; set; }
+        public string Emp_Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
-        public double Salary { get; set; }
-        public Department Emp_dept { get; set; }
+        public string Age { get; set; }
+        public string Salary { get; set; }
+        public string Emp_dept { get; set; }
         /// <summary>
         /// Cotr with parameters
         /// </summary>
@@ -20,7 +20,7 @@ namespace lesson_5
         /// <param name="_name">name</param>
         /// <param name="_age">age</param>
         /// <param name="_salary">salary</param>
-        public Employee(int id, string _name, int _age, double _salary, Department department)
+        public Employee(string id, string _name, string _age, string _salary, string department)
         {
             //MainWindow.count_emp_id++;
             Emp_Id = id;

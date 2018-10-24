@@ -9,9 +9,12 @@ namespace lesson_5
     public class Department
     {
         public int Dept_Id { get; set; }
+        public string Name { get; set; }
+
         public Department(int _id)
         {
             Dept_Id = _id;
+            Name = "Department";
         }
         /// <summary>
         /// default cotr
@@ -22,7 +25,7 @@ namespace lesson_5
 
         public override string ToString()
         {
-            return $"Department {Dept_Id}";
+            return $"{Name} {Dept_Id}";
         }
     }
 }
